@@ -1,224 +1,160 @@
-package src;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class MainMenu {
-    static String[][] clientes = new String[4][4];
-    static String[][] empleados = new String[4][4];
-    static ArrayList<String[]> contratadosGrupos = new ArrayList<>();
-    static String[][] gruposDisponibles = {
-            {"Grupo1", String.valueOf(new Random().nextBoolean()), "Genre1", "Country1"},
-            {"Grupo2", String.valueOf(new Random().nextBoolean()), "Genre2", "Country2"},
-            {"Grupo3", String.valueOf(new Random().nextBoolean()), "Genre3", "Country3"},
-            {"Grupo4", String.valueOf(new Random().nextBoolean()), "Genre4", "Country4"}
-    };
-
     public static void main(String[] args) {
-        mainMenu();
+       mainMenu();
     }
-
     public static void mainMenu() {
         Scanner sc = new Scanner(System.in);
 
-        boolean salir = false;
-        int opcion;
-
+        boolean sortir = false;
+        int option;
         do {
             System.out.println("   <-------------- Menu -------------->\n" +
-                    "   Selecciona una opción: \n" +
+                    "   Selecciona una opció: \n" +
                     "       1. Introducir/mostrar clientes.\n" +
                     "       2. Introducir/mostrar trabajadores.\n" +
                     "       3. Contratar grupo.\n" +
-                    "       4. Registrar consumiciones.\n" +
                     "       0. Salir.\n");
             System.out.print("Opcion: ");
 
-            opcion = sc.nextInt();
-
-            switch (opcion) {
+            option = sc.nextInt();
+            switch (option) {
                 case 1:
                     System.out.println("submenu 1");
-                    submenuClientes();
+                    submenuClients();
                     break;
                 case 2:
                     System.out.println("submenu 2");
-                    submenuEmpleados();
+                    submenuEmployees();
                     break;
                 case 3:
                     contratarGrupos();
                     break;
                 case 4:
-                    Consumiciones.realizarConsumicion();
+                    System.out.println("submenu 4");
                     break;
                 case 0:
-                    salir = true;
-                    System.out.println("Has salido del menú");
+                    sortir = true;
+                    System.out.println("Has sortit del menu");
                     break;
                 default:
-                    System.out.println("Introduce una opción válida.");
+                    System.out.println("Introdueix una opcio valida!");
                     break;
             }
-        } while (!salir);
-
-        sc.close();
+        } while (!sortir);
     }
-
-    public static void submenuEmpleados() {
+    public static void submenuEmployees() {
         Scanner sc = new Scanner(System.in);
 
-        int opcion;
-
+        int option;
         do {
             System.out.println(" <-------------- Submenu Empleados -------------->\n" +
-                    "   Selecciona una opción: \n" +
-                    "       1. Introducir empleados.\n" +
-                    "       2. Mostrar empleados.\n" +
-                    "       0. Volver atrás.");
+                    "   Selecciona una opció: \n" +
+                    "       1. Introducir empleados.\n" +  //1
+                    "       2. Mostrar empleados.\n" +   //2
+                    "       0. Volver atras.");
             System.out.print("Opcion: ");
 
-            opcion = sc.nextInt();
-
-            switch (opcion) {
+            option = sc.nextInt();
+            switch (option) {
                 case 1:
-                    System.out.println("Introducir empleados...");
-
-                    for (int i = 0; i < empleados.length; i++) {
-                        System.out.print("Ingrese nombre del empleado: ");
-                        empleados[i][0] = sc.next();
-
-                        System.out.print("Ingrese apellido del empleado: ");
-                        empleados[i][1] = sc.next();
-
-                        System.out.print("Ingrese DNI del empleado: ");
-                        empleados[i][2] = sc.next();
-
-                        System.out.print("Ingrese cantidad de paga del empleado: ");
-                        empleados[i][3] = sc.next();
-
-                        System.out.println("¿Desea introducir más empleados? (1: Sí / 0: No)");
-                        int continuar = sc.nextInt();
-                        if (continuar != 1) {
-                            opcion = 0;
-                            break;
-                        }
-                    }
+                    System.out.println("Introduce employees...");
                     break;
                 case 2:
-                    System.out.println("Mostrar empleados...");
-
-                    for (int i = 0; i < empleados.length; i++) {
-                        System.out.println("Empleado #" + (i + 1) +
-                                "\nNombre: " + empleados[i][0] +
-                                "\nApellido: " + empleados[i][1] +
-                                "\nDNI: " + empleados[i][2] +
-                                "\nCantidad de Paga: " + empleados[i][3] + "\n");
-                    }
+                    System.out.println("Show employees...");
                     break;
                 case 0:
                     break;
                 default:
-                    System.out.println("Introduce una opción válida.");
+                    System.out.println("Introdueix una opcio valida!");
                     break;
             }
-        } while (opcion != 0);
-    }
+        }while (option != 0);
 
-    public static void submenuClientes() {
+    }
+    public static void submenuClients() {
         Scanner sc = new Scanner(System.in);
 
         int MAX_CLIENTES = 4;
-        int opcion;
+        String[] nombresClientes = new String[MAX_CLIENTES];
+        String[] apellidosClientes = new String[MAX_CLIENTES];
+        String[] dniClientes = new String[MAX_CLIENTES];
 
+        int option;
         do {
             System.out.println(" <-------------- Submenu Clientes -------------->\n" +
-                    "   Selecciona una opción: \n" +
-                    "       1. Introducir cliente.\n" +
-                    "       2. Mostrar cliente.\n" +
-                    "       0. Volver atrás.");
+                    "   Selecciona una opció: \n" +
+                    "       1. Introducir cliente.\n" +  //1
+                    "       2. Mostrar cliente.\n" +   //2
+                    "       0. Volver atras.");
             System.out.print("Opcion: ");
 
-            opcion = sc.nextInt();
-
-            switch (opcion) {
+            option = sc.nextInt();
+            switch (option) {
                 case 1:
+                    //Se pide src.a los usuarios que ingresen sus datos.
                     for (int i = 0; i < MAX_CLIENTES; i++) {
                         System.out.print("Ingrese su nombre: ");
-                        clientes[i][0] = sc.next();
+                        nombresClientes[i] = sc.nextLine(); sc.next();
 
                         System.out.print("Ingrese su apellido: ");
-                        clientes[i][1] = sc.next();
+                        apellidosClientes[i] = sc.nextLine();sc.next();
 
                         System.out.print("Ingrese su DNI: ");
-                        clientes[i][2] = sc.next();
-
-                        boolean correcto = false;
-                        while (!correcto) {
-                            System.out.print("Ingrese el tipo de cliente (general/gratis/vip): ");
-                            String tipoCliente = sc.next().toLowerCase();
-
-                            if (tipoCliente.equals("general") || tipoCliente.equals("gratis") || tipoCliente.equals("vip")) {
-                                clientes[i][3] = tipoCliente;
-                                correcto = true;
-                            } else {
-                                System.out.println("Tipo cliente no válido. Por favor ingrese: (general, gratis, vip)");
-                            }
-                        }
-
-                        System.out.println("¿Desea introducir más clientes? (1: Sí / 0: No)");
-                        int continuar = sc.nextInt();
-                        if (continuar != 1) {
-                            opcion = 0;
-                            break;
-                        }
+                        dniClientes[i] = sc.nextLine();sc.next();
+                        System.out.println();
                     }
                     break;
                 case 2:
-                    System.out.println("Datos de los clientes:");
-                    System.out.println("+-----------------+-----------------+-----------------+-----------------+");
-                    System.out.println("|      Nombre     |     Apellido    |       DNI       |    Tipo cliente |");
-                    System.out.println("+-----------------+-----------------+-----------------+-----------------+");
                     for (int i = 0; i < MAX_CLIENTES; i++) {
-                        System.out.printf("| %-15s | %-15s | %-15s | %-15s |\n", clientes[i][0], clientes[i][1], clientes[i][2], clientes[i][3]);
+                        System.out.println("Cliente #" + (i + 1) + "\n" + "Nombre: " + nombresClientes[i] +
+                                "\n" + "Apellido: " + apellidosClientes[i] + "\n" + "DNI: " + dniClientes[i] + "\n");
                     }
-                    System.out.println("+-----------------+-----------------+-----------------+-----------------+");
-
-                    opcion = 0;
-
                     break;
                 case 0:
                     break;
                 default:
-                    System.out.println("Introduce una opción válida.");
+                    System.out.println("Introdueix una opcio valida!");
                     break;
             }
-        } while (opcion != 0);
+        }while (option != 0);
     }
-
-    public static void contratarGrupos() {
+    public static void contratarGrupos(){
         Scanner sc = new Scanner(System.in);
+        Random rd = new Random();
+
+        String[][] Grupos = {
+                {"Grupo1", String.valueOf(rd.nextBoolean()), "Genre1", "Country1"},
+                {"Grupo2", String.valueOf(rd.nextBoolean()), "Genre2", "Country2"},
+                {"Grupo3", String.valueOf(rd.nextBoolean()), "Genre3", "Country3"},
+                {"Grupo4", String.valueOf(rd.nextBoolean()), "Genre4", "Country4"}
+        };
+
+        ArrayList<String[]> Grupos_contratados = new ArrayList<>();
 
         while (true) {
             try {
-                System.out.println("Grupos de Música disponibles");
+                System.out.println("Grupos de Musica disponibles");
 
-                for (int i = 0; i < gruposDisponibles.length; i++) {
-                    System.out.println((i + 1) + ". " + gruposDisponibles[i][0] +
-                            " | Disponibilidad: " + gruposDisponibles[i][1] +
-                            " | Género: " + gruposDisponibles[i][2] +
-                            " | País: " + gruposDisponibles[i][3]);
+                for (int i = 0; i < Grupos.length; i++) {
+                    System.out.println((i + 1) + ". " + Grupos[i][0] +
+                            " | Disponibilidad: " + Grupos[i][1] +
+                            " | Genre: " + Grupos[i][2] +
+                            " | Country: " + Grupos[i][3]);
                 }
 
-                System.out.println("Si quiere contratar un grupo elija el número que le corresponda. (para salir introduzca 0)");
+                System.out.println("Si quiere contratar un grupo elija el numero que le corresponda. (para salir intruduzca 0)");
 
-                int eleccion = sc.nextInt();
+                int a = sc.nextInt();
 
-                if (eleccion != 0 && eleccion <= gruposDisponibles.length) {
-                    if (Boolean.parseBoolean(gruposDisponibles[eleccion - 1][1])) {
-                        contratadosGrupos.add(gruposDisponibles[eleccion - 1]);
-                        System.out.println("Ha contratado al grupo: " + gruposDisponibles[eleccion - 1][0]);
+                if (a != 0 && a <= Grupos.length) {
+                    if (Boolean.parseBoolean(Grupos[a - 1][1])) {
+                        Grupos_contratados.add(Grupos[a - 1]);
+                        System.out.println("Ha contratado al grupo: " + Grupos[a - 1][0]);
                     } else {
                         System.out.println("El grupo seleccionado no está disponible.");
                     }
@@ -233,11 +169,11 @@ public class MainMenu {
         }
 
         System.out.println("Grupos contratados:");
-        for (String[] grupo : contratadosGrupos) {
+        for (String[] grupo : Grupos_contratados) {
             System.out.println("Grupo: " + grupo[0] +
                     " | Disponibilidad: " + grupo[1] +
-                    " | Género: " + grupo[2] +
-                    " | País: " + grupo[3]);
+                    " | Genre: " + grupo[2] +
+                    " | Country: " + grupo[3]);
         }
     }
 }
