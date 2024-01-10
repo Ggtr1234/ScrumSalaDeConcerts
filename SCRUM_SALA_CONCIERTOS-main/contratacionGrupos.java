@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class a {
+public class contratacionGrupos {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Random rd = new Random();

@@ -32,6 +32,7 @@ public class MainMenu {
                     "       1. Introducir/mostrar clientes.\n" +
                     "       2. Introducir/mostrar trabajadores.\n" +
                     "       3. Contratar grupo.\n" +
+                    "       4. Registrar consumiciones.\n" +
                     "       0. Salir.\n");
             System.out.print("Opcion: ");
 
@@ -48,6 +49,9 @@ public class MainMenu {
                     break;
                 case 3:
                     contratarGrupos();
+                    break;
+                case 4:
+                    Consumiciones.realizarConsumicion();
                     break;
                 case 0:
                     salir = true;
